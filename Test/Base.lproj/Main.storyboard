@@ -101,7 +101,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="320" height="519"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
-                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="RzP-vE-y1z">
+                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="RzP-vE-y1z">
                                 <rect key="frame" x="0.0" y="0.0" width="320" height="519"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                 <subviews>
@@ -150,12 +150,6 @@
                             </scrollView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
-                        <constraints>
-                            <constraint firstItem="RzP-vE-y1z" firstAttribute="leading" secondItem="HBv-WY-hpa" secondAttribute="leading" id="FEH-gQ-gc6"/>
-                            <constraint firstItem="RzP-vE-y1z" firstAttribute="top" secondItem="HBv-WY-hpa" secondAttribute="top" id="Pen-fZ-V57"/>
-                            <constraint firstItem="zjU-mJ-iss" firstAttribute="top" secondItem="RzP-vE-y1z" secondAttribute="bottom" id="fR6-qT-JhW"/>
-                            <constraint firstAttribute="trailing" secondItem="RzP-vE-y1z" secondAttribute="trailing" id="j4C-9P-XpO"/>
-                        </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="Kbi-wo-JBX"/>
                     <connections>

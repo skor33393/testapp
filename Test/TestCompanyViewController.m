@@ -43,15 +43,17 @@
     [activityIndicator startAnimating];
     
     [[TestEmployeeStorage sharedStorage] fetchEmployeesWithCompletionHandler:^(NSArray *employees, NSError *error) {
-        self.employees = employees;
-        self.employeesCount.detailTextLabel.text = [NSString stringWithFormat:@"%lu", (unsigned long)[self.employees count]];
-        NSInteger hours = 0;
-        for (TestEmployee *empl in self.employees) {
-            hours += [[empl all_hours] intValue];
+        if (!error) {
+            self.employees = employees;
+            self.employeesCount.detailTextLabel.text = [NSString stringWithFormat:@"%lu", (unsigned long)[self.employees count]];
+            NSInteger hours = 0;
+            for (TestEmployee *empl in self.employees) {
+                hours += [[empl all_hours] intValue];
+            }
+            self.allHours.detailTextLabel.text = [NSString stringWithFormat:@"%ld", (long)hours];
+            self.averageHours.detailTextLabel.text = [NSString stringWithFormat:@"%u", hours / [self.employees count]];
         }
-        self.allHours.detailTextLabel.text = [NSString stringWithFormat:@"%ld", (long)hours];
-        self.averageHours.detailTextLabel.text = [NSString stringWithFormat:@"%u", hours / [self.employees count]];
-        
+
         [activityView removeFromSuperview];
     }];
     

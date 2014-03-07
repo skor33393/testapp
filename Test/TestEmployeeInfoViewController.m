@@ -44,7 +44,7 @@
                 avgHours += [[self.employee.hours objectForKey:key] intValue];
             }
             avgHours /= [self.employee.hours count];
-            self.averageHours.text = [NSString stringWithFormat:@"среднее время работы: %ld", (long)avgHours];
+            self.averageHours.text = [NSString stringWithFormat:@"среднее время работы: %ld час.", (long)avgHours];
         }
         else {
             self.averageHours.text = @"среднее время работы: неизвестно";

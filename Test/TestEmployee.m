@@ -29,4 +29,22 @@ static NSString *host = @"http://sizer.highglossy.com";
     return self;
 }
 
+- (void)setNumber:(NSString *)num {
+    if ([num isEqualToString:@""]) {
+        _number = @"неизвестен";
+    }
+    else {
+        _number = num;
+    }
+}
+
+- (void)setPosition:(NSString *)pos {
+    if ([pos isEqualToString:@""]) {
+        _position = @"неизвестна";
+    }
+    else {
+        _position = pos;
+    }
+}
+
 @end

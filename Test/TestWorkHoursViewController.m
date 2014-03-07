@@ -8,6 +8,10 @@
 
 #import "TestWorkHoursViewController.h"
 
+@interface TestWorkHoursViewController ()
+@property (nonatomic, strong) NSArray *sortedKeys;
+@end
+
 @implementation TestWorkHoursViewController
 
 #pragma mark - UITableViewDataSource
@@ -23,7 +27,7 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"work hours cell"];
 
-    NSString *key = [[self.hours allKeys] objectAtIndex:indexPath.row];
+    NSString *key = [self.sortedKeys objectAtIndex:indexPath.row];
     cell.textLabel.text = key;
     cell.detailTextLabel.text = [self.hours objectForKey:key];
     
@@ -47,6 +51,15 @@
 	// Do any additional setup after loading the view.
     
     self.workHoursTableView.dataSource = self;
+    
+    NSArray *toSort = [self.hours allKeys];
+    self.sortedKeys = [toSort sortedArrayUsingComparator:^NSComparisonResult(id a, id b) {
+        NSString *first = (NSString *)a;
+        NSString *second = (NSString *)b;
+        
+        return [first compare:second];
+    }];
+        
 }
 
 - (void)didReceiveMemoryWarning
