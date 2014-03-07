@@ -39,9 +39,7 @@ static NSMutableArray *sharedConnectionList = nil;
     [container appendData:data];
 }
 
-- (void)connectionDidFinishLoading:(NSURLConnection *)connection {
-    //NSLog(@"%@", container);
-    
+- (void)connectionDidFinishLoading:(NSURLConnection *)connection {    
     if ([self completionBlock]) {
         [self completionBlock](container, nil);
     }

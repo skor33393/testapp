@@ -27,14 +27,23 @@
     
     self.successfull = NO;
     
-    NSString *urlString = [NSString stringWithFormat:@"http://%@", self.employee.photoURL];
+    // check if phoyoURL is not nil
+    if (self.employee.photoURL) {
+        NSString *urlString = [NSString stringWithFormat:@"http://%@", self.employee.photoURL];
         
-    NSURLRequest *request = [NSURLRequest requestWithURL:[NSURL URLWithString:urlString]];
-    
-    // alloc+init and start an NSURLConnection; release on completion/failure
-    NSURLConnection *conn = [[NSURLConnection alloc] initWithRequest:request delegate:self];
-    
-    self.imageConnection = conn;
+        NSURLRequest *request = [NSURLRequest requestWithURL:[NSURL URLWithString:urlString]];
+        
+        // alloc+init and start an NSURLConnection; release on completion/failure
+        NSURLConnection *conn = [[NSURLConnection alloc] initWithRequest:request delegate:self];
+        
+        self.imageConnection = conn;
+    }
+    else {
+        self.employee.photo = [UIImage imageNamed:@"noPhoto"];
+        if (self.completionHandler) {
+            self.completionHandler();
+        }
+    }
 }
 
 - (void)cancelDownload
@@ -53,12 +62,16 @@
 
 - (void)connection:(NSURLConnection *)connection didFailWithError:(NSError *)error
 {
-    self.employee.photo = nil;
+    self.employee.photo = [UIImage imageNamed:@"noPhoto"];
 	// Clear the activeDownload property to allow later attempts
     self.activeDownload = nil;
     
     // Release the connection now that it's finished
     self.imageConnection = nil;
+    
+    if (self.completionHandler) {
+        self.completionHandler();
+    }
 }
 
 - (void)connection:(NSURLConnection *)connection didReceiveResponse:(NSURLResponse *)response {
@@ -98,6 +111,16 @@
         // call our delegate and tell it that our icon is ready for display
         if (self.completionHandler)
             self.completionHandler();
+    }
+    else {
+        self.employee.photo = [UIImage imageNamed:@"noPhoto"];
+        self.activeDownload = nil;
+        
+        // Release the connection now that it's finished
+        self.imageConnection = nil;
+        if (self.completionHandler) {
+            self.completionHandler();
+        }
     }
 }
 

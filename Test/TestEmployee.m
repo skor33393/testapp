@@ -29,5 +29,4 @@ static NSString *host = @"http://sizer.highglossy.com";
     return self;
 }
 
-
 @end
